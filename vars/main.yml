@@ -1,6 +1,4 @@
 ---
-tachyon_ver : 0.7.1
-hadoop_ver : 'hadoop2.6'
 tachyon_name : 'tachyon-{{tachyon_ver}}'
-tachyon_tgz : '{{tachyon_name}}-{{hadoop_ver}}-bin.tar.gz'
-tachyon_tgz_url : 'https://github.com/amplab/tachyon/releases/download/v0.7.1/{{tachyon_tgz}}'
+tachyon_tgz : '{{tachyon_name}}-bin.tar.gz'
+tachyon_tgz_url : '{{tachyon_mirror}}/{{tachyon_ver}}/{{tachyon_tgz}}'

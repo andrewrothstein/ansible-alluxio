@@ -1,12 +1,31 @@
 ---
 - name: download tachyon release
-  get_url: url={{tachyon_tgz_url}} dest='/tmp/{{tachyon_tgz}}'
+  become: yes
+  become_user: root
+  get_url:
+    url: '{{tachyon_tgz_url}}'
+    dest: /tmp/{{tachyon_tgz}}
 
 - name: unarchive the tachyon release
-  unarchive: copy=no src='/tmp/{{tachyon_tgz}}' dest='/opt'
+  become: yes
+  become_user: root
+  unarchive:
+    copy: no
+    src: /tmp/{{tachyon_tgz}}
+    dest: /opt
 
 - name: link tachyon
-  file: src='/opt/{{tachyon_name}}' dest='/opt/tachyon' state=link
+  become: yes
+  become_user: root
+  file:
+    src: /opt/{{tachyon_name}}
+    dest: /opt/tachyon
+    state: link
 
 - name: include tachyon in the default path...
-  copy: src='etc/profile.d/tachyon.sh' dest='/etc/profile.d/tachyon.sh' mode=644
+  become: yes
+  become_user: root
+  copy:
+    src: etc/profile.d/tachyon.sh
+    dest: /etc/profile.d/tachyon.sh
+    mode: 0644

@@ -12,13 +12,17 @@ galaxy_info:
         - 7
     - name: Fedora
       versions:
-        - 21
+        - 23
+        - 24
+        - 25
     - name: Ubuntu
       versions:
         - trusty
-
-  categories:
+        - xenial
+  galaxy_tags:
     - development
 
-dependencies: []
+dependencies:
+  - role: andrewrothstein.unarchive-deps
+    version: v1.0.8
   

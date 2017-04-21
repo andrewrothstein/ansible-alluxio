@@ -1,5 +1,0 @@
----
-tachyon_ver : 0.7.1
-hadoop_ver : 2.6
-tachyon_tgz : 'tachyon-{{tachyon_ver}}-hadoop{{hadoop_ver}}-bin.tar.gz
-https://github.com/amplab/tachyon/releases/download/v0.7.1/{{tachyon_tgz}}

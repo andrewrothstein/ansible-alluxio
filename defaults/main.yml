@@ -1,4 +1,6 @@
 ---
-tachyon_ver : '0.8.2'
-tachyon_mirror : 'http://tachyon-project.org/downloads/files'
+alluxio_ver : '1.4.0'
+alluxio_hadoop_ver: hadoop2.7
+alluxio_mirror : http://downloads.alluxio.org/downloads/files
 
+alluxio_parent_install_dir: /usr/local

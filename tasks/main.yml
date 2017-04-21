@@ -1,31 +1,36 @@
 ---
-- name: download tachyon release
+- name: download...
   become: yes
   become_user: root
   get_url:
-    url: '{{tachyon_tgz_url}}'
-    dest: /tmp/{{tachyon_tgz}}
+    url: '{{alluxio_tgz_url}}'
+    dest: /tmp/{{alluxio_tgz}}
 
-- name: unarchive the tachyon release
+- name: unarchive...
   become: yes
   become_user: root
   unarchive:
     copy: no
-    src: /tmp/{{tachyon_tgz}}
-    dest: /opt
+    src: /tmp/{{alluxio_tgz}}
+    dest: '{{alluxio_parent_install_dir}}'
+    creates: '{{alluxio_install_dir}}'
 
-- name: link tachyon
+- name: link...
   become: yes
   become_user: root
   file:
-    src: /opt/{{tachyon_name}}
-    dest: /opt/tachyon
+    src: '{{alluxio_install_dir}}'
+    dest: '{{alluxio_install_link}}'
     state: link
 
-- name: include tachyon in the default path...
+- name: augment default path...
   become: yes
   become_user: root
-  copy:
-    src: etc/profile.d/tachyon.sh
-    dest: /etc/profile.d/tachyon.sh
-    mode: 0644
+  with_items:
+    - f: alluxio.sh
+      d: /etc/profile.d
+      m: '0644'
+  template:
+    src: '{{item.f}}.j2'
+    dest: '{{item.d}}/{{item.f}}'
+    mode: '{{item.m}}'

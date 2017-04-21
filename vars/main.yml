@@ -1,4 +1,7 @@
 ---
-tachyon_name : 'tachyon-{{tachyon_ver}}'
-tachyon_tgz : '{{tachyon_name}}-bin.tar.gz'
-tachyon_tgz_url : '{{tachyon_mirror}}/{{tachyon_ver}}/{{tachyon_tgz}}'
+alluxio_name : 'alluxio-{{alluxio_ver}}'
+alluxio_tgz : '{{alluxio_name}}-{{alluxio_hadoop_ver}}-bin.tar.gz'
+alluxio_tgz_url : '{{alluxio_mirror}}/{{alluxio_ver}}/{{alluxio_tgz}}'
+
+alluxio_install_dir: '{{alluxio_parent_install_dir}}/{{alluxio_name}}'
+alluxio_install_link: '{{alluxio_parent_install_dir}}/alluxio'

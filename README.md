@@ -2,7 +2,7 @@
 andrewrothstein.alluxio
 ===========================
 
-Installs [Alluxio](http://www.alluxio.org/)
+Installs [Alluxio](http://www.alluxio.org/).
 
 Requirements
 ------------

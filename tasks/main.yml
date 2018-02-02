@@ -1,27 +1,43 @@
 ---
-- name: download...
+- name: check for install...
   become: yes
-  become_user: root
-  get_url:
-    url: '{{alluxio_tgz_url}}'
-    dest: /tmp/{{alluxio_tgz}}
+  stat:
+    path: '{{alluxio_install_dir}}'
+  changed_when: False
+  register: alluxio_binary
+- when: not alluxio_binary.stat.exists
+  block:
+    - name: download...
+      become: yes
+      become_user: root
+      get_url:
+        url: '{{alluxio_tgz_url}}'
+        dest: /tmp/{{alluxio_tgz}}
+        checksum: '{{alluxio_checksum}}'
+        mode: 0644
 
-- name: unarchive...
-  become: yes
-  become_user: root
-  unarchive:
-    copy: no
-    src: /tmp/{{alluxio_tgz}}
-    dest: '{{alluxio_parent_install_dir}}'
-    creates: '{{alluxio_install_dir}}'
-
-- name: link...
-  become: yes
-  become_user: root
-  file:
-    src: '{{alluxio_install_dir}}'
-    dest: '{{alluxio_install_link}}'
-    state: link
+    - name: unarchive...
+      become: yes
+      become_user: root
+      unarchive:
+        remote_src: yes
+        src: /tmp/{{alluxio_tgz}}
+        dest: '{{alluxio_parent_install_dir}}'
+        creates: '{{alluxio_install_dir}}'
+    - name: link...
+      become: yes
+      become_user: root
+      file:
+        src: '{{alluxio_install_dir}}'
+        dest: '{{alluxio_install_link}}'
+        state: link
+  always:
+    - name: cleanup...
+      become: yes
+      become_user: root
+      file:
+        path: /tmp/{{alluxio_tgz}}
+        state: absent
 
 - name: augment default path...
   become: yes

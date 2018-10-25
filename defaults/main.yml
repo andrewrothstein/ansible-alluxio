@@ -1,5 +1,5 @@
 ---
-alluxio_ver : '1.7.1'
+alluxio_ver : '1.8.1'
 alluxio_hadoop_ver: hadoop-2.8
 alluxio_mirror : http://downloads.alluxio.org/downloads/files
 
@@ -26,5 +26,11 @@ alluxio_checksums:
     hadoop-2.5: sha256:39d48f4607a4461e3981768a1a0b13c79a363c6d809d5e9bdbea7307a8b49e55
     # http://downloads.alluxio.org/downloads/files/1.7.1/alluxio-1.7.1-hadoop-2.4-bin.tar.gz
     hadoop-2.4: sha256:4132201c1760d6fc00a155152da898543c9bc5d7beb1a48290f4768b2f4883d8
+  '1.8.1':
+    hadoop-2.4: sha256:297ecd0378a31f7fabace3c1d5ee20d394192442167c4f0b2f657139f570eb5f
+    hadoop-2.5: sha256:5e92f874c3aaa28336a14366dbe822d0f1a7490857712571ce5848ba1195c222
+    hadoop-2.6: sha256:377f5be33fa1b5f41e0461c24ec97953ab67ce934542a327fdcddeeffb5cfd78
+    hadoop-2.7: sha256:7ca068953867dc39ab488f3bfb573e641685bd1bb839c0e54b7991fcc19cfc7a
+    hadoop-2.8: sha256:dea6db017260372da76a306f4f2ecbbcf4b35102c23b79f6194ed4fc9546340c
 
 alluxio_parent_install_dir: /usr/local

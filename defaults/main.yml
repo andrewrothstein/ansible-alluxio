@@ -1,7 +1,8 @@
 ---
-alluxio_ver : '1.8.1'
-alluxio_hadoop_ver: hadoop-2.8
-alluxio_mirror : http://downloads.alluxio.org/downloads/files
+alluxio_ver: 1.8.2
+alluxio_hadoop_ver: hadoop-2.9
+alluxio_mirror: http://downloads.alluxio.org/downloads/files
+alluxio_parent_install_dir: /usr/local
 
 alluxio_checksums:
   '1.7.0':
@@ -32,5 +33,16 @@ alluxio_checksums:
     hadoop-2.6: sha256:377f5be33fa1b5f41e0461c24ec97953ab67ce934542a327fdcddeeffb5cfd78
     hadoop-2.7: sha256:7ca068953867dc39ab488f3bfb573e641685bd1bb839c0e54b7991fcc19cfc7a
     hadoop-2.8: sha256:dea6db017260372da76a306f4f2ecbbcf4b35102c23b79f6194ed4fc9546340c
-
-alluxio_parent_install_dir: /usr/local
+  '1.8.2':
+    # http://downloads.alluxio.org/downloads/files/1.8.2/alluxio-1.8.2-hadoop-2.9-bin.tar.gz.md5
+    hadoop-2.9: md5:a7f52b90c8dd5dc6e434b9f9e1776c09
+    # http://downloads.alluxio.org/downloads/files/1.8.2/alluxio-1.8.2-hadoop-2.8-bin.tar.gz.md5
+    hadoop-2.8: md5:7afacbcf14effb5dfb91d63dfc25864d
+    # http://downloads.alluxio.org/downloads/files/1.8.2/alluxio-1.8.2-hadoop-2.7-bin.tar.gz.md5
+    hadoop-2.7: md5:65baabc6d60df308b3aaa67119eb748e
+    # http://downloads.alluxio.org/downloads/files/1.8.2/alluxio-1.8.2-hadoop-2.6-bin.tar.gz.md5
+    hadoop-2.6: md5:646a30af1ee14c0018ff4fdd7eb708ea
+    # http://downloads.alluxio.org/downloads/files/1.8.2/alluxio-1.8.2-hadoop-2.5-bin.tar.gz.md5
+    hadoop-2.5: md5:fac7c3463d5b3fdd55a0aeb2daa27234
+    # http://downloads.alluxio.org/downloads/files/1.8.2/alluxio-1.8.2-hadoop-2.4-bin.tar.gz.md5
+    hadoop-2.4: md5:1f9d65ce6b66b9949ffd89a41cf86c57

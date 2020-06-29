@@ -1,20 +1,27 @@
 #!/usr/bin/env sh
-VER=1.8.1
+set -e
 DIR=~/Downloads
-MIRROR=http://downloads.alluxio.org/downloads/files/$VER
-FILE_PREFIX=alluxio-$VER
+MIRROR=http://downloads.alluxio.org/downloads/files
 
 dl()
 {
-    HADOOP_VER=$1
-    FILE=$FILE_PREFIX-hadoop-$HADOOP_VER-bin.tar.gz
-    wget -O $DIR/$FILE $MIRROR/$FILE
+    local ver=$1
+    local hadoop_ver=$2
+    local url="${MIRROR}/${ver}/alluxio-${ver}-hadoop-${hadoop_ver}-bin.tar.gz.md5"
+    printf "    # %s\n" $url
+    printf "    hadoop-%s: md5:%s\n" $hadoop_ver $(curl -sSL $url | awk '{print $1}')
 }
 
-dl 2.8
-dl 2.7
-dl 2.6
-dl 2.5
-dl 2.4
-sha256sum $DIR/${FILE_PREFIX}*
+dl_ver() {
+    ver=$1
+    printf "  '%s':\n" $ver
+    dl $ver 2.9
+    dl $ver 2.8
+    dl $ver 2.7
+    dl $ver 2.6
+    dl $ver 2.5
+    dl $ver 2.4
 
+}
+
+dl_ver ${1:-1.8.2}

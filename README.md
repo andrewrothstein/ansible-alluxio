@@ -1,6 +1,6 @@
-[![CircleCI](https://circleci.com/gh/andrewrothstein/ansible-alluxio.svg?style=svg)](https://circleci.com/gh/andrewrothstein/ansible-alluxio)
 andrewrothstein.alluxio
 ===========================
+![Build Status](https://github.com/andrewrothstein/ansible-alluxio/actions/workflows/build.yml/badge.svg)
 
 Installs [Alluxio](http://www.alluxio.org/).
 

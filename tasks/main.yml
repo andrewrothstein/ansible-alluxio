@@ -1,45 +1,45 @@
 ---
-- name: check for install...
+- name: check for install in {{ alluxio_install_dir }}
   become: yes
   stat:
-    path: '{{alluxio_install_dir}}'
+    path: '{{ alluxio_install_dir }}'
   changed_when: False
   register: alluxio_binary
 - when: not alluxio_binary.stat.exists
   block:
-    - name: download...
+    - name: downloading {{ alluxio_tgz_url }}
       become: yes
       become_user: root
       get_url:
-        url: '{{alluxio_tgz_url}}'
-        dest: /tmp/{{alluxio_tgz}}
-        checksum: '{{alluxio_checksum}}'
+        url: '{{ alluxio_tgz_url }}'
+        dest: '{{ alluxio_tmp_tgz }}'
+        checksum: '{{ alluxio_checksum }}'
         mode: 0644
 
-    - name: unarchive...
+    - name: unarchiving {{ alluxio_tmp_tgz }}
       become: yes
       become_user: root
       unarchive:
         remote_src: yes
-        src: /tmp/{{alluxio_tgz}}
-        dest: '{{alluxio_parent_install_dir}}'
-        creates: '{{alluxio_install_dir}}'
-    - name: link...
+        src: '{{ alluxio_tmp_tgz }}'
+        dest: '{{ alluxio_parent_install_dir }}'
+        creates: '{{ alluxio_install_dir }}'
+    - name: linking {{ alluxio_install_link }} to {{ alluxio_install_dir }}
       become: yes
       become_user: root
       file:
-        src: '{{alluxio_install_dir}}'
-        dest: '{{alluxio_install_link}}'
+        src: '{{ alluxio_install_dir }}'
+        dest: '{{ alluxio_install_link }}'
         state: link
   always:
-    - name: cleanup...
+    - name: rm {{ alluxio_tmp_tgz }}
       become: yes
       become_user: root
       file:
-        path: /tmp/{{alluxio_tgz}}
+        path: '{{ alluxio_tmp_tgz }}'
         state: absent
 
-- name: augment default path...
+- name: augment default shell path...
   become: yes
   become_user: root
   with_items:
@@ -47,6 +47,6 @@
       d: /etc/profile.d
       m: '0644'
   template:
-    src: '{{item.f}}.j2'
-    dest: '{{item.d}}/{{item.f}}'
-    mode: '{{item.m}}'
+    src: '{{ item.f }}.j2'
+    dest: '{{ item.d }}/{{ item.f }}'
+    mode: '{{ item.m }}'

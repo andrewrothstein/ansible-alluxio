@@ -1,4 +1,16 @@
 ---
 - hosts: all
+  vars:
+    openjdk_ver:
+      major: 11
+      minor: 0
+      patch: "14.1"
+      b: "1"
   roles:
     - role: '{{ playbook_dir }}'
+  tasks:
+    - command: sh -l -c 'alluxio version'
+      register: alluxio_test_output
+    - name: alluxio version
+      debug:
+        msg: '{{ alluxio_test_output.stdout }}'

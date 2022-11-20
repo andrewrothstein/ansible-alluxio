@@ -1,6 +1,12 @@
 ---
+- include_role:
+    name: andrewrothstein.unarchive-deps
+- include_role:
+    name: andrewrothstein.temurin
+  vars:
+    openjdk_app: jre
 - name: check for install in {{ alluxio_install_dir }}
-  become: yes
+  become: true
   stat:
     path: '{{ alluxio_install_dir }}'
   changed_when: False
@@ -8,7 +14,7 @@
 - when: not alluxio_binary.stat.exists
   block:
     - name: downloading {{ alluxio_tgz_url }}
-      become: yes
+      become: true
       become_user: root
       get_url:
         url: '{{ alluxio_tgz_url }}'
@@ -17,15 +23,15 @@
         mode: 0644
 
     - name: unarchiving {{ alluxio_tmp_tgz }}
-      become: yes
+      become: true
       become_user: root
       unarchive:
-        remote_src: yes
+        remote_src: true
         src: '{{ alluxio_tmp_tgz }}'
         dest: '{{ alluxio_parent_install_dir }}'
         creates: '{{ alluxio_install_dir }}'
     - name: linking {{ alluxio_install_link }} to {{ alluxio_install_dir }}
-      become: yes
+      become: true
       become_user: root
       file:
         src: '{{ alluxio_install_dir }}'
@@ -33,14 +39,14 @@
         state: link
   always:
     - name: rm {{ alluxio_tmp_tgz }}
-      become: yes
+      become: true
       become_user: root
       file:
         path: '{{ alluxio_tmp_tgz }}'
         state: absent
 
 - name: augment default shell path...
-  become: yes
+  become: true
   become_user: root
   with_items:
     - f: alluxio.sh
